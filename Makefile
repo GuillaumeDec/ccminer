@@ -643,10 +643,11 @@ ccminer_LDADD = -L/usr/lib/x86_64-linux-gnu -lcurl -ljansson -lpthread  \
 ccminer_CPPFLAGS =  -fopenmp $(CPPFLAGS) \
 	$(PTHREAD_FLAGS) -fno-strict-aliasing $(JANSSON_INCLUDES) \
 	$(DEF_INCLUDES) $(nvml_defs) $(am__append_2)
-nvcc_ARCH = -gencode=arch=compute_50,code=\"sm_50,compute_50\" \
-	-gencode=arch=compute_52,code=\"sm_52,compute_52\"
+
+#nvcc_ARCH += -gencode=arch=compute_52,code=\"sm_52,compute_52\"
 #nvcc_ARCH += -gencode=arch=compute_35,code=\"sm_35,compute_35\"
-#nvcc_ARCH += -gencode=arch=compute_30,code=\"sm_30,compute_30\"
+nvcc_ARCH = -gencode=arch=compute_50,code=\"sm_50,compute_50\" \
+	-gencode=arch=compute_30,code=\"sm_30,compute_30\"
 #nvcc_ARCH += -gencode=arch=compute_20,code=\"sm_21,compute_20\"
 nvcc_FLAGS = $(nvcc_ARCH) -I/usr/local/cuda/include -I.  \
 	$(JANSSON_INCLUDES) --ptxas-options="-v"
